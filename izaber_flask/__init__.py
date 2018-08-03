@@ -25,6 +25,13 @@ class IZaberFlask(flask.Flask):
     allowed_protocol = None
 
     def __init__(self,*args,**kwargs):
+        # By default the static_folder and static_url_path point
+        # to this module's location.
+        # By setting it to None, it will not automatically create the
+        # /static/ to the local static folder allowing us to to
+        # override it later on
+        kwargs.setdefault('static_folder',None)
+        kwargs.setdefault('static_url_path',None)
         super(IZaberFlask,self).__init__(*args,**kwargs)
         self.allowed_protocol = None
 
