@@ -9,6 +9,7 @@ from izaber.paths import paths
 
 import flask
 
+
 autoloader.add_prefix('izaber.flask')
 
 CONFIG_BASE = """
@@ -17,6 +18,7 @@ default:
     flask:
         host: 127.0.0.1
         port: 5000
+        secret_key: 'correctbatteryhorsestaple'
 
 """
 
@@ -30,6 +32,9 @@ class IZaberFlask(flask.Flask):
         # By setting it to None, it will not automatically create the
         # /static/ to the local static folder allowing us to to
         # override it later on
+        # We want to create something like an empty container
+        # app to start worth so we can load all components as
+        # blueprint entries
         kwargs.setdefault('static_folder',None)
         kwargs.setdefault('static_url_path',None)
         super(IZaberFlask,self).__init__(*args,**kwargs)
@@ -53,11 +58,14 @@ class IZaberFlask(flask.Flask):
                                 )
 
 app = IZaberFlask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 @initializer('flask')
 def load_config(**kwargs):
     request_initialize('config',**kwargs)
     request_initialize('logging',**kwargs)
     config.config_amend_(CONFIG_BASE)
+
+    app.secret_key = config.flask.secret_key
 
 
