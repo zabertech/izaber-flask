@@ -3,10 +3,10 @@
 from setuptools import setup
 
 setup(name='izaber_flask',
-      version='1.0',
+      version='1.20180813',
       description='Base load point for iZaber flask',
       url = 'https://github.com/zabertech/izaber-flask',
-      download_url = 'https://github.com/zabertech/izaber-flask/archive/1.0.tar.gz',
+      download_url = 'https://github.com/zabertech/izaber-flask/archive/1.20180813.tar.gz',
       author='Aki Mimoto',
       author_email='aki+izaber@zaber.com',
       license='MIT',

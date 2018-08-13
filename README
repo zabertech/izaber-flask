@@ -28,3 +28,8 @@ Install by using:
 pip install izaber-flask
 
 
+Packaging
+============
+
+python setup.py sdist && twine upload dist/*
+
